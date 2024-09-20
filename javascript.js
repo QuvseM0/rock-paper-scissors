@@ -1,6 +1,6 @@
-let rock = "Rock"
-let paper = "Paper"
-let scissors = "Scissors"
+let rock = "rock"
+let paper = "paper"
+let scissors = "scissors"
 
 function getComputerChoice(){
     let choice = Math.random()
@@ -14,5 +14,9 @@ function getComputerChoice(){
 } 
 
 
+function getHumanChoice(pick){
+    pick = prompt("Rock, Paper or Scissors?")
+    return pick = pick.trim().toLowerCase(pick)
+}
 
-console.log(getComputerChoice())
+console.log(getHumanChoice())
