@@ -53,6 +53,8 @@ function playGame(nr){
                 ++humanScore
                 state = win + "killed paper"
             }
+        else
+            return humanChoice + " isn't a valid input, refresh the page and try again"
         return state
     }
     for (i = 0; i < nr; i++){
