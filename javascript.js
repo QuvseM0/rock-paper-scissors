@@ -1,6 +1,11 @@
 let rock = "rock"
 let paper = "paper"
 let scissors = "scissors"
+let win = "You Win!" 
+let lose = "You Lose!" 
+let tie = "TIE!"
+let state
+let log
 let humanScore = 0
 let computerScore = 0
 
@@ -21,49 +26,76 @@ function getHumanChoice(pick){
     return pick
 }
 
-function playGame(nr){
-    let state
-    function playRound(humanChoice,computerChoice){
-        let win = "you win, " 
-        let lose = "you lose, " 
-        let tie = "you're tied"
-        if (humanChoice == computerChoice)
-            return tie
-        else if (humanChoice != computerChoice && humanChoice == rock)
+function playRound(humanChoice,computerChoice){
+        if (humanChoice == computerChoice){
+            log = " You're equal in strength"
+            return state = tie
+        }else if (humanChoice != computerChoice && humanChoice == rock)
             if (computerChoice == paper) {
+                log = " Paper beats rock"
+                state = lose
                 ++computerScore
-                state = lose + "killed by paper"
             } else {
+                log = " Rock beats scissors"
+                state = win
                 ++humanScore
-                state = win + "killed scissors"
             }
         else if (humanChoice != computerChoice && humanChoice == paper)
             if (computerChoice == scissors) {
+                log = " Scissors beats paper"
+                state = lose
                 ++computerScore
-                state = lose + "killed by scissors"
             } else {
+                log = " Paper beats rock"
+                state = win
                 ++humanScore
-                state = win + "killed rock"
             }
         else if (humanChoice != computerChoice && humanChoice == scissors)
             if (computerChoice == rock) {
+                log = " Rock beats scissors"
+                state = lose
                 ++computerScore
-                state = lose + "killed by rock"
             } else {
+                log = " Scissors beats paper"
+                state = win
                 ++humanScore
-                state = win + "killed paper"
             }
         else
-            return humanChoice + " isn't a valid input, refresh the page and try again"
+            return log = "try again"
         return state
-    }
-    for (i = 0; i < nr; i++){
-        console.log(playRound(getHumanChoice(),getComputerChoice()))
-        console.log("User: " + humanScore)
-        console.log("CPU: " + computerScore)   
-    }    
 }
 
-playGame(5)
+const user = document.querySelector(".user")
+const cpu = document.querySelector(".cpu")
+const msg = document.querySelector(".msg")
+const buttons = document.querySelectorAll(".choiceBtn")
+
+user.textContent = "USER: " + humanScore
+cpu.textContent = "CPU: "+ computerScore
 
 
+    buttons.forEach((button) => {
+        button.addEventListener("click", e => {
+            console.log(button.id, humanScore, computerScore)
+            let choice = button.id
+            playRound(choice,getComputerChoice())
+
+            if (e)
+                user.textContent = "USER: " + humanScore
+                cpu.textContent = "CPU: "+ computerScore
+                if(humanScore == 5){
+                    msg.textContent = "YOU WIN THE GAME" + " " + humanScore + " to " + computerScore
+                    humanScore = 0
+                    computerScore = 0
+                }else if(computerScore == 5){
+                    msg.textContent = "YOU LOSE THE GAME" + " " + computerScore + " to " + humanScore
+                    humanScore = 0
+                    computerScore = 0
+                }else{
+                    msg.textContent = state + log 
+                }
+
+        })
+    })
+
+    
