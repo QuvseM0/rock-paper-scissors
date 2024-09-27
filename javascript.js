@@ -6,6 +6,7 @@ let lose = "You Lose!"
 let tie = "TIE!"
 let state
 let log
+let defaultLog = "Choose your weapon!"
 let humanScore = 0
 let computerScore = 0
 
@@ -70,6 +71,7 @@ const cpu = document.querySelector(".cpu")
 const msg = document.querySelector(".msg")
 const buttons = document.querySelectorAll(".choiceBtn")
 
+msg.textContent = defaultLog
 user.textContent = "USER: " + humanScore
 cpu.textContent = "CPU: "+ computerScore
 
@@ -79,7 +81,6 @@ cpu.textContent = "CPU: "+ computerScore
             console.log(button.id, humanScore, computerScore)
             let choice = button.id
             playRound(choice,getComputerChoice())
-
             if (e)
                 user.textContent = "USER: " + humanScore
                 cpu.textContent = "CPU: "+ computerScore
